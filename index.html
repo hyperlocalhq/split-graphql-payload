@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Split GraphQL Payload</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      font-family: monospace;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Split Payload</h1>
+  <textarea id="input-payload" placeholder="Input Payload"></textarea>
+  <textarea id="query" placeholder="Query"></textarea>
+  <textarea id="variables" placeholder="Variables"></textarea>
+
+  <script>
+    const inputPayloadTextarea = document.getElementById('input-payload');
+    const queryTextarea = document.getElementById('query');
+    const variablesTextarea = document.getElementById('variables');
+
+    inputPayloadTextarea.addEventListener('input', () => {
+      try {
+        const payload = JSON.parse(inputPayloadTextarea.value);
+        queryTextarea.value = payload.query;
+        variablesTextarea.value = JSON.stringify(payload.variables, null, 2);
+      } catch (error) {
+        queryTextarea.value = '';
+        variablesTextarea.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
